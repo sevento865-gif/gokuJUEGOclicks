@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>TRANSFORMA A GOKU</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+/* HEADER */
+header {
+  background: #bfe6ff;
+  padding: 20px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* CONTENEDOR */
+.container {
+  display: flex;
+  height: calc(100vh - 80px);
+}
+
+/* IZQUIERDA */
+.left {
+  width: 50%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* DERECHA */
+.right {
+  width: 50%;
+  background: white;
+  text-align: center;
+  padding-top: 20px;
+}
+
+/* ========================= */
+/*  AURA */
+/* ========================= */
+
+#aura {
+  position: relative;
+  display: inline-block;
+}
+
+/* GOKU */
+#goku {
+  width: 280px;
+  position: relative;
+  z-index: 2;
+}
+
+/* AURA ENERGÍA */
+#aura::before,
+#aura::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130%;
+  height: 130%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 1;
+  filter: blur(25px);
+  animation: auraFlow 0.9s infinite alternate ease-in-out;
+}
+
+/* MOVIMIENTO */
+@keyframes auraFlow {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* COLORES SEGÚN TRANSFORMACIÓN */
+.base::before,
+.base::after { background: radial-gradient(circle, yellow, transparent); }
+
+.ss::before,
+.ss::after { background: radial-gradient(circle, gold, transparent); }
+
+.ss2::before,
+.ss2::after { background: radial-gradient(circle, orange, transparent); }
+
+.ss3::before,
+.ss3::after { background: radial-gradient(circle, red, transparent); }
+
+.blue::before,
+.blue::after { background: radial-gradient(circle, cyan, transparent); }
+
+.ultra::before,
+.ultra::after { background: radial-gradient(circle, white, transparent); }
+
+/* CONTADOR */
+#contador {
+  font-size: 60px;
+  margin: 20px;
+}
+
+/* BOTÓN */
+#boton {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#boton img {
+  width: 140px;
+  transition: transform 0.1s;
+}
+
+#boton:active img {
+  transform: scale(0.9);
+}
+
+/* NIVELES */
+.niveles {
+  margin-top: 30px;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  padding: 15px;
+  color: white;
+}
+
+.numeros {
+  display: flex;
+  justify-content: space-around;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.gifs {
+  display: flex;
+  justify-content: space-around;
+}
+
+.gifs img {
+  width: 140px;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.2s;
+}
+
+.gifs img:hover {
+  transform: scale(1.2);
+}
+
+.reset-btn {
+  margin-top: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.reset-btn img {
+  width: 100px;
+  transition: transform 0.2s;
+}
+
+.reset-btn:active img {
+  transform: scale(0.9);
+}
+</style>
+
+</head>
+<body>
+
+<header>TRANSFORMA A GOKU</header>
+
+<div class="container">
+
+  <!-- IZQUIERDA -->
+  <div class="left">
+    <div id="aura" class="base">
+      <img id="goku" src="goku1.png">
+    </div>
+  </div>
+
+  <!-- DERECHA -->
+  <div class="right">
+    <h2 id="contador">0</h2>
+
+    <button id="boton">
+      <img src="dragon.png">
+    </button>
+
+    <button id="reiniciar" class="reset-btn">
+  <img src="reset.png">
+</button>
+
+
+    <div class="niveles">
+
+      <div class="numeros">
+        <div>10</div>
+        <div>20</div>
+        <div>30</div>
+        <div>40</div>
+        <div>50</div>
+      </div>
+
+      <div class="gifs">
+        <img src="a2.gif">
+        <img src="a4.gif">
+        <img src="a5.gif">
+        <img src="a1.gif">
+        <img src="a3.gif">
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+let clicks = 0;
+
+const contador = document.getElementById("contador");
+const boton = document.getElementById("boton");
+const goku = document.getElementById("goku");
+const aura = document.getElementById("aura");
+
+boton.addEventListener("click", () => {
+  clicks++;
+  contador.textContent = clicks;
+  cambiarTransformacion();
+});
+
+function cambiarTransformacion() {
+
+  if (clicks < 10) {
+    goku.src = "goku1.png";
+    aura.className = "base";
+  }
+
+  else if (clicks < 20) {
+    goku.src = "goku2.png";
+    aura.className = "ss";
+  }
+
+  else if (clicks < 30) {
+    goku.src = "goku3.png";
+    aura.className = "ss2";
+  }
+
+  else if (clicks < 40) {
+    goku.src = "goku4.WEBP";
+    aura.className = "ss3";
+  }
+
+  else if (clicks < 50) {
+    goku.src = "goku5.WEBP";
+    aura.className = "blue";
+  }
+
+  else {
+    goku.src = "goku6.png";
+    aura.className = "ultra";
+  }
+}
+
+const reiniciar = document.getElementById("reiniciar");
+reiniciar.addEventListener("click", () => {
+  clicks = 0;
+  contador.textContent = 0;
+
+  goku.src = "goku1.png";
+  aura.className = "base";
+});
+</script>
+
+</body>
+</html>
